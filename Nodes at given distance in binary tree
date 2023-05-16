@@ -1,0 +1,63 @@
+
+class Solution
+{
+    public static ArrayList<Integer> KDistanceNodes(Node root, int target , int k)
+    {
+        // return the sorted list of all nodes at k dist
+        
+        ArrayList<Node> path=new ArrayList<>();
+        pathtotarget(root,target,path);
+        ArrayList<Integer> ans=new ArrayList<>();
+        for(int i=0;i<path.size();i++){
+            printkleveldown(path.get(i),k-i,ans,i==0?null:path.get(i-1));
+        }
+        Collections.sort(ans);
+        
+        return ans;
+        
+        
+    }
+    
+    public static boolean pathtotarget(Node node,int target,ArrayList<Node> path ){
+               
+        if(node==null){
+            return false;
+        }
+        if(node.data==target)
+        {
+            path.add(node);
+            return true;
+        }
+        boolean left=pathtotarget(node.left,target,path);
+        if(left){
+            path.add(node);
+            
+            return true;
+        }
+        
+         boolean right=pathtotarget(node.right,target,path);
+        if(right){
+            path.add(node);
+            return true;
+        }
+        
+        return false;
+        
+
+        
+        
+    }
+    
+    
+    public static void printkleveldown(Node node,int k,ArrayList<Integer> ans,Node block)   {
+         if(node==null || k<0 || node==block){
+             return ;
+         }
+         if(k==0){
+             ans.add(node.data);
+         }
+         printkleveldown(node.left,k-1,ans,block);
+         printkleveldown(node.right,k-1,ans,block);
+     }
+    
+};
