@@ -1,0 +1,27 @@
+class Tree
+{
+     // Recursive function to print right view of a binary tree.
+     ArrayList<Integer> Kdistance(Node root, int k)
+     {
+          // Your code here
+          ArrayList<Integer> ans=new ArrayList<>();
+          helper(ans,root,k);
+          return  ans ;
+          
+          
+
+     }
+         public  void helper(ArrayList<Integer> ans,Node root,int k){
+          if(root==null || k<0){
+              return ;
+          }
+          if(k==0){
+              ans.add(root.data);
+              
+          }
+          helper(ans,root.left,k-1);
+          helper(ans,root.right,k-1);
+              
+          }
+          
+}
