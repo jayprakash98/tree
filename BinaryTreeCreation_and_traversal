@@ -1,0 +1,56 @@
+import java.util.*;
+
+class TreeNode {
+    int data;
+    TreeNode left;
+    TreeNode right;
+
+    public TreeNode(int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+public class BinaryTreeExample {
+    public static TreeNode createBinaryTree(Scanner scanner) {
+        System.out.print("Enter data (or -1 to represent null): ");
+        int data = scanner.nextInt();
+
+        if (data == -1) {
+            return null;
+        }
+
+        TreeNode root = new TreeNode(data);
+
+        System.out.println("Enter left child of " + data);
+        root.left = createBinaryTree(scanner);
+
+        System.out.println("Enter right child of " + data);
+        root.right = createBinaryTree(scanner);
+
+        return root;
+    }
+
+    public static void inorderTraversal(TreeNode root) {
+        if (root != null) {
+            inorderTraversal(root.left);
+            System.out.print(root.data + " ");
+            inorderTraversal(root.right);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Create a binary tree
+        System.out.println("Create a Binary Tree");
+        TreeNode root = createBinaryTree(scanner);
+
+        // Perform inorder traversal
+        System.out.println("Inorder Traversal:");
+        inorderTraversal(root);
+
+        scanner.close();
+    }
+}
